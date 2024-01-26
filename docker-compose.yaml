@@ -1,0 +1,23 @@
+version: "3"
+services:
+  dagan-db:
+    container_name: dagan
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - dagan:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+  adminer:
+    depends_on:
+      - dagan-db
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+volumes:
+  dagan:
